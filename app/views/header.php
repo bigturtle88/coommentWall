@@ -18,3 +18,4 @@
 	<script src="<?php echo SITE_URL;?>application/views/js/diagramma.js"></script>
 </head>
 <body>
+<?php var_dump($config);die();?>

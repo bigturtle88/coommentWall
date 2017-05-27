@@ -2,7 +2,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
-
+use app\core\View;
 /**
  * Class ControllerMain
  * @package app\controllers
@@ -22,7 +22,7 @@ class ControllerMain extends Controller
      */
     function __construct()
     {
-     $this->view  = new View();
+
 
     }
 
@@ -35,8 +35,8 @@ class ControllerMain extends Controller
 
         $data['title'] = 'Caesar cipher';
 
-        $this->view->generate($data, 'header.php');
-        $this->view->generate($data, 'index.php');
-        $this->view->generate($data, 'footer.php');
+        View::render($data, 'header.php');
+        View::render($data, 'index.php');
+        View::render($data, 'footer.php');
     }
 }

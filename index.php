@@ -11,5 +11,4 @@ require_once  __DIR__.'/app/load.php';
  */
 require_once __DIR__.'/config.php';
 
-
-app\Router::execute($config);
+(new App($config))->execute();
