@@ -1,8 +1,10 @@
 <?php
+
 namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
+
 /**
  * Class ControllerMain
  * @package app\controllers
@@ -31,8 +33,6 @@ class ControllerMain extends Controller
      */
     public function actionIndex()
     {
-
-
         $data['title'] = 'Caesar cipher';
 
         View::render($data, 'header.php');

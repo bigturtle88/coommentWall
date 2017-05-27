@@ -2,21 +2,12 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\View;
 
 class ControllerE404 extends Controller
 {
-    public $model;
-    public $view;
-    public $data = array();
-
-    function __construct()
+      public function actionIndex()
     {
-        $this->view  = new View();
-        $this->model = new Model();
-    }
-
-    public function actionIndex()
-    {
-        echo '404';
+        View::render(     $data['title'] = 'Caesar cipher','e404.php');
     }
 }

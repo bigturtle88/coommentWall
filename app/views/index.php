@@ -2,9 +2,9 @@
 
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h4 class="page-header"><a href="<?php echo SITE_URL; ?>">
+        <h4 class="page-header"><a href="<?= App::baseUrl() ?>/app/">
                 <img id="logo"
-                     src="<?php echo SITE_URL; ?>application/views/img/logo.png"
+                     src="<?= App::baseUrl() ?>/app/views/img/logo.png"
                      alt="Whitesquare logo">
             </a></h4>
     </div>

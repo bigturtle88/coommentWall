@@ -2,7 +2,7 @@
 
 namespace app;
 
-use app\core;
+
 
 /**
  * Class Router
@@ -20,6 +20,7 @@ class Router extends core\Router
      */
     static function execute($config)
     {
+
         $url = self::allUrl();
         $urlSep = self::urlSeparator($url);
         $path = self::pathSeparator($urlSep['path']);
@@ -77,6 +78,15 @@ class Router extends core\Router
     {
         $allUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         return $allUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function  baseUrl()
+    {
+        $baseUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
+        return $baseUrl;
     }
 }
 

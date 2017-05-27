@@ -3,18 +3,21 @@
 /**
  * Class app
  */
-
 class App
 {
-    private $config;
+    private static $config;
 
-    public function __construct($config)
+    public static function execute($config)
     {
-        $this->config = $config;
+        self::$config = $config;
+
+        \app\Router::execute(self::$config);
     }
 
-    public function execute()
+    public static function baseUrl()
     {
-        \app\Router::execute($this->config);
+        return \app\Router::baseUrl();
     }
+
+
 }
