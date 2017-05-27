@@ -1,4 +1,8 @@
 <?php
+namespace app\controllers;
+
+use app\core\Controller;
+
 class ControllerE404 extends Controller
 {
     public $model;
@@ -13,10 +17,6 @@ class ControllerE404 extends Controller
 
     public function actionIndex()
     {
-        $data['result'] = '404!';
-
-        $this->view->generate($data, 'header.php');
-        $this->view->generate($data, 'e404.php');
-        $this->view->generate($data, 'footer.php');
+        echo '404';
     }
 }

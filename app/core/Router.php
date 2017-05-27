@@ -2,7 +2,6 @@
 
 namespace app\core;
 
-
 /**
  * Class Router
  * @package app\core
@@ -27,33 +26,19 @@ class Router
         $actionName = empty($path['action']) ? $config['baseAction'] : $path['action'];
         $params = empty($path['params']) ? null : $path['params'];
 
-  //      $modelName = 'Model' . ucfirst(strtolower($controllerName));
-        $controllerName = 'Controller' .ucfirst(strtolower($controllerName));
+        $controllerName = 'Controller' . ucfirst(strtolower($controllerName));
         $actionName = 'action' . ucfirst(strtolower($actionName));
-    //    $fileWithModel = $modelName . '.php';
-   //     $fileWithModelPath = "app/models/" . $fileWithModel;
 
-       $controllerRun ="\\app\\controllers\\{$controllerName}";
-       $controllerRun::$actionName($params);
+        $controllerRun = "\\app\\controllers\\{$controllerName}";
 
-        $fileWithController = strtolower($controllerName) . '.php';
-        $fileWithControllerPath
-            = "app/controllers/" . $fileWithController;
-        if (file_exists($fileWithControllerPath)) {
-            require_once($fileWithControllerPath);
+        if (method_exists($controllerRun, $actionName)) {
+
+            $controllerRun::$actionName($params);
         } else {
             $controllerName = 'ControllerE404';
-            require_once('app/controllers/controllerE404.php');
-        }
-        $controller = new $controllerName;
-        $action = $actionName;
-        if (method_exists($controller, $action) != false) {
-            call_user_func(array($controller, $action), $parameter);
-        } else {
-            require_once('app/controllers/controllerE404.php');
-            $controller = new ControllerE404;
-            $action = 'actionIndex';
-            call_user_func(array($controller, $action));
+            $controllerRun = "\\app\\controllers\\$controllerName";
+            $actionName = 'actionIndex';
+            $controllerRun::$actionName();
         }
     }
 
