@@ -12,10 +12,13 @@ abstract class Model
     public $result;
     public $data = array();
 
-    function __construct()
+    /**
+     * Model constructor.
+     */
+    public function __construct()
     {
-        require_once('db.php');
-        $this->dbh = new DB_Mysql();
+
     }
+
 }
 

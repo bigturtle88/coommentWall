@@ -3,23 +3,36 @@ namespace app\controllers;
 
 use app\core\Controller;
 
+/**
+ * Class ControllerMain
+ * @package app\controllers
+ */
 class ControllerMain extends Controller
 {
+    /**
+     * @var
+     */
     public $model;
     public $view;
     public $result;
     public $data = array();
 
+    /**
+     * ControllerMain constructor.
+     */
     function __construct()
     {
      $this->view  = new View();
 
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
 
-        return 'z';
+
         $data['title'] = 'Caesar cipher';
 
         $this->view->generate($data, 'header.php');

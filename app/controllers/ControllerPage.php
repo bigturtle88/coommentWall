@@ -1,7 +1,10 @@
 <?php
-require_once("application/helpers/HelperCaesarCipher.php");
 
-class ControllerCipher extends Controller
+/**
+ * Class ControllerPage
+ */
+
+class ControllerPage extends Controller
 {
     public $model;
     public $view;
