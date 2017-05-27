@@ -1,6 +1,8 @@
 <?php
 
 namespace app\core;
+
+
 /**
  * Class Router
  * @package app\core
@@ -13,25 +15,27 @@ class Router
     static $router = array();
 
     /**
-     *
+     * @param $config
      */
-    static function execute()
+    static function execute($config)
     {
         $url = self::allUrl();
         $urlSep = self::urlSeparator($url);
         $path = self::pathSeparator($urlSep['path']);
 
-        empty($args[0]) ? $controllerName = 'main' : $controllerName = $args[0];
-        empty($args[1]) ? $actionName = 'index' : $actionName = $args[1];
-        empty($args[2]) ? $parameter = null : $parameter = $args[2];
-        $modelName = 'Model' . ucfirst(strtolower($controllerName));
-        $controllerName = 'Controller' . ucfirst(strtolower($controllerName));
+        $controllerName = empty($path['controller']) ? $config['baseController'] : $path['controller'];
+        $actionName = empty($path['action']) ? $config['baseAction'] : $path['action'];
+        $params = empty($path['params']) ? null : $path['params'];
+
+  //      $modelName = 'Model' . ucfirst(strtolower($controllerName));
+        $controllerName = 'Controller' .ucfirst(strtolower($controllerName));
         $actionName = 'action' . ucfirst(strtolower($actionName));
-        $fileWithModel = $modelName . '.php';
-        $fileWithModelPath = "app/models/" . $fileWithModel;
-        if (file_exists($fileWithModelPath)) {
-            require_once($fileWithModelPath);
-        }
+    //    $fileWithModel = $modelName . '.php';
+   //     $fileWithModelPath = "app/models/" . $fileWithModel;
+
+       $controllerRun ="\\app\\controllers\\{$controllerName}";
+       $controllerRun::$actionName($params);
+
         $fileWithController = strtolower($controllerName) . '.php';
         $fileWithControllerPath
             = "app/controllers/" . $fileWithController;

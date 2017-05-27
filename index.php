@@ -12,4 +12,4 @@ require_once  __DIR__.'/app/load.php';
 require_once __DIR__.'/config.php';
 
 
-app\core\Router::execute();
+app\core\Router::execute($config);

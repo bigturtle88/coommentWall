@@ -1,4 +1,7 @@
 <?php
+namespace app\controllers;
+
+use app\core\Controller;
 
 class ControllerMain extends Controller
 {
@@ -9,12 +12,14 @@ class ControllerMain extends Controller
 
     function __construct()
     {
-        $this->view  = new View();
+     $this->view  = new View();
 
     }
 
     public function actionIndex()
     {
+
+        return 'z';
         $data['title'] = 'Caesar cipher';
 
         $this->view->generate($data, 'header.php');

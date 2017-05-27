@@ -13,6 +13,10 @@ spl_autoload_register(function ($className) {
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    require $fileName;
+    if (file_exists($fileName)) {
+        require $fileName;
+        return true;
+    }
+    return false;
 });
 
