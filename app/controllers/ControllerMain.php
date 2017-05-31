@@ -33,7 +33,8 @@ class ControllerMain extends Controller
      */
     public function actionIndex()
     {   $model = new Model('comments');
-        $model->create(['id'],['123123']);
+        $a = $model->delete(['id<1152']);
+        var_dump( $a);die();
         $data['title'] = 'Caesar cipher';
 
         View::render('header.php', $data);
