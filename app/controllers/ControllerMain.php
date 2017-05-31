@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
-
+use app\core\Model;
 /**
  * Class ControllerMain
  * @package app\controllers
@@ -32,11 +32,12 @@ class ControllerMain extends Controller
      * @return string
      */
     public function actionIndex()
-    {
+    {   $model = new Model('comments');
+        $model->create(['id'],['123123']);
         $data['title'] = 'Caesar cipher';
 
-        View::render($data, 'header.php');
-        View::render($data, 'index.php');
-        View::render($data, 'footer.php');
+        View::render('header.php', $data);
+        View::render('index.php', $data);
+        View::render('footer.php', $data);
     }
 }

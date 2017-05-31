@@ -5,13 +5,13 @@
  */
 class App
 {
-    private static $config;
+    public static $config;
 
     public static function execute($config)
     {
         self::$config = $config;
 
-        \app\Router::execute(self::$config);
+        \app\Router::execute(self::$config['router']);
     }
 
     public static function baseUrl()

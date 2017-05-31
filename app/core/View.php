@@ -4,8 +4,8 @@ namespace app\core;
 
 abstract class View
 {
-    public function render($content, $template, $data = null)
+    public function render($template, $content, $data = null)
     {
-        require_once('app/views/' . $template);
+        require_once  __DIR__ . '\\..\\..\\app\\views\\' . $template;
     }
 }

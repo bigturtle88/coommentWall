@@ -35,10 +35,9 @@ class Router extends core\Router
         $controllerRun = "\\app\\controllers\\{$controllerName}";
 
         if (method_exists($controllerRun, $actionName)) {
-
-            $controllerRun::$actionName($params);
+            (new $controllerRun)->$actionName($params);
         } else {
-            $controllerName = 'ControllerE404';
+            $controllerName = 'ControllerError';
             $controllerRun = "\\app\\controllers\\$controllerName";
             $actionName = 'actionIndex';
             $controllerRun::$actionName();
