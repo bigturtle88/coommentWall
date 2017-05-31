@@ -13,7 +13,7 @@ use App;
  * Class Model
  * @package app\core
  */
-class Model implements TableInsert, TableSelect, TableUpdate, TableDelete
+abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDelete
 {
     private static $dbh;
     public $row;
@@ -103,6 +103,10 @@ class Model implements TableInsert, TableSelect, TableUpdate, TableDelete
         return false;
     }
 
+    /**
+     * @param $arrConditions
+     * @return bool
+     */
     public function delete($arrConditions)
     {
         if (isset($arrConditions)) {
@@ -113,8 +117,6 @@ class Model implements TableInsert, TableSelect, TableUpdate, TableDelete
             return true;
         }
         return false;
-
     }
-
 }
 

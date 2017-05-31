@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
-use app\core\Model;
+use app\models\ModelMain;
 /**
  * Class ControllerMain
  * @package app\controllers
@@ -32,9 +32,12 @@ class ControllerMain extends Controller
      * @return string
      */
     public function actionIndex()
-    {   $model = new Model('comments');
-        $a = $model->delete(['id<1152']);
-        var_dump( $a);die();
+    {   $model = new ModelMain('comments');
+        $model->create(['id'],[12]);
+        $model->create(['id'],[22]);
+        $model->create(['id'],[33]);
+
+       die();
         $data['title'] = 'Caesar cipher';
 
         View::render('header.php', $data);

@@ -73,7 +73,6 @@ class DbAdapter
     private function connect()
     {
         self::$dbh = new PDO(self::$params, self::$user, self::$pass, self::$opt);
-
     }
 
     /**
