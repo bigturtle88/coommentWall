@@ -4,11 +4,11 @@ namespace app\logic;
 
 class Session
 {
-    public function __construct()
+    private function __construct()
     {
     }
 
-    public function getToken()
+    public static function getToken()
     {
         if (isset($_SESSION['fb_access_token'])) {
             return $_SESSION['fb_access_token'];
@@ -16,7 +16,7 @@ class Session
         return null;
     }
 
-    public function setToken($params)
+    public static function setToken($params)
     {
         $_SESSION['fb_access_token'] = (string)$params;
     }

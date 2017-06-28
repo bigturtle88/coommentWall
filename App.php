@@ -9,6 +9,7 @@ class App
 
     public static function execute($config)
     {
+        session_start();
         self::$config = $config;
 
         \app\Router::execute(self::$config['router']);

@@ -12,8 +12,8 @@ class Auth
 
     public static function init()
     {
-        $fb = new \Facebook\Facebook(['app_id' => APP_ID,
-            'app_secret' => APP_SECRET,
+        $fb = new \Facebook\Facebook(['app_id' => self::APP_ID,
+            'app_secret' => self::APP_SECRET,
             'default_graph_version' => 'v2.9',
         ]);
         $helper = $fb->getJavaScriptHelper();
@@ -28,11 +28,8 @@ class Auth
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-        if (!isset($accessToken)) {
-            echo 'No cookie set or no OAuth data could be obtained from cookie.';
-            return null;
-        }
-         var_dump($accessToken);
+
+         return $accessToken;
     }
 
 }

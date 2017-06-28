@@ -43,32 +43,30 @@ class ControllerMain extends Controller
 //        $model = new ModelMain('comments');
 //        $model->create(['id'], [12]);
 //        $model->create(['id'], [22]);
-//        $model->create(['id'], [33]);
-        $token = Auth::init();
-        var_dump($token);
-        $session = new Session();
-        if ($session->getToken() == null) {
 
-            $session->setToken($token);
 
+        if (Session::getToken() == null) {
+            $token = Auth::init();
+
+            Session::setToken($token);
+
+            View::render('header.php', $data);
+            View::render('index.php', $data);
+            View::render('footer.php', $data);
         }
         echo "Hi";
-//        echo '<h3>Access Token</h3>';
-//        $accessToken =    "EAAWIkG5PsNABAIW8wJtzS4Y7qLCZA222k7FLWDyx4EZC7XZCjDiIcZCDF5XP04dlM7ZA4bjZAbvqgAcwF3D7aqHHjESfama5nSE0DkQED2C34pDpGJfZCZBxKViN8xR6DjJMndhuqhT56CzlVJZAiIiz9ljPseXIXrrIjZCje9xsXcTZAbzPdgKW86GF2WPQVlDmZBwZD";
-//        if ( isset($accessToken)) { $_SESSION['fb_access_token'] = (string) $accessToken;
-//            //var_dump($accessToken->getValue());
-//
-//
+
 //
 //            $response = $fb->get('/me?fields=id,name', $accessToken);
 //            $user = $response->getGraphUser();
-//            var_dump($user);die();
-//        }
 
-        $session = (new Session)->getToken();
-        var_dump($a);
+
+
+        $data['content'] = "";
+
+
         View::render('header.php', $data);
-        View::render('index.php', $data);
+     //   View::render('index.php', $data);
         View::render('footer.php', $data);
     }
 }

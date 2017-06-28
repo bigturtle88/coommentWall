@@ -15,5 +15,6 @@ $config = [
     ],
     'dir' => [
         'migrations' => 'app\migrations'
-    ]
+    ],
+    'key' =>[]
 ];
