@@ -11,12 +11,18 @@ abstract class Controller
     public $model;
     public $view;
 
-   function __construct()
+    /**
+     * Controller constructor.
+     */
+    public function __construct()
     {
 
     }
 
-    function actionIndex()
+    /**
+     *
+     */
+    public function actionIndex()
     {
     }
 }

@@ -12,5 +12,8 @@ $config = [
         'params' => 'mysql:host=localhost;dbname=cw.loc;charset=utf8',
         'user' => 'root',
         'pass' => ''
+    ],
+    'dir' => [
+        'migration' => __DIR__ . '/app/migration'
     ]
 ];
