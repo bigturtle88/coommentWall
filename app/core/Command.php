@@ -50,12 +50,13 @@ class Command
 
     public static function migrate()
     {
-        $migrations = array_diff(scandir(\App::$config['dir']['migration']), array('..', '.'));
+        $migrations = array_diff(scandir(__DIR__ . '\\..\\..\\' . \App::$config['dir']['migrations']), array('..', '.'));
 
         foreach ($migrations as $migration) {
             $migration = str_replace('.php', '', $migration);
-            echo "Create migration "  . $migration;
-            $migration::create();
+            echo "Create migration " . $migration . "\n";
+            $migration = \App::$config['dir']['migrations'] . '\\' . $migration;
+            (new $migration)->creat();
         }
 
     }

@@ -1,5 +1,7 @@
 <?php
 
+namespace app\migrations;
+
 use app\core\migration;
 
 class MigrateCreatTableUsers extends Migration

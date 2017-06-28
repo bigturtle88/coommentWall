@@ -14,6 +14,6 @@ $config = [
         'pass' => ''
     ],
     'dir' => [
-        'migration' => __DIR__ . '/app/migration'
+        'migrations' => 'app\migrations'
     ]
 ];
