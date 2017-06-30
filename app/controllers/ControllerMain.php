@@ -4,10 +4,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\View;
-use app\logic\Auth;
+use app\logic\Fb;
 use app\logic\Session;
-use app\models\ModelMain;
-
+use app\logic\Reg;
 use app\components\AuthFacebook;
 
 
@@ -40,33 +39,34 @@ class ControllerMain extends Controller
     public function actionIndex()
     {
 
-//        $model = new ModelMain('comments');
-//        $model->create(['id'], [12]);
-//        $model->create(['id'], [22]);
+        if (Session::getToken() === null) {
+            $fb = new Fb;
+            $token = $fb->token();
+            if ($token != null) {
+                $userParams = $fb->userParams();
+                if (Reg::verification($userParams) == false) {
+                    Reg::add($userParams);
+                };
 
+                Session::setToken($userParams['id'], $token);
+                header('Location: ' . \App::baseUrl() . '/main/comment');
+            }
 
-        if (Session::getToken() == null) {
-            $token = Auth::init();
-
-            Session::setToken($token);
-
-            View::render('header.php', $data);
-            View::render('index.php', $data);
-            View::render('footer.php', $data);
+        } else {
+            header('Location: ' . \App::baseUrl() . '/main/comment');
         }
-        echo "Hi";
-
-//
-//            $response = $fb->get('/me?fields=id,name', $accessToken);
-//            $user = $response->getGraphUser();
-
-
-
-        $data['content'] = "";
-
 
         View::render('header.php', $data);
-     //   View::render('index.php', $data);
+        View::render('index.php', $data);
         View::render('footer.php', $data);
     }
+
+    public function actionComment()
+    {
+
+        echo "hello";
+
+    }
+
+
 }

@@ -2,23 +2,27 @@
 
 namespace app\logic;
 
+use app\models\ModelMain;
+
+
 class Session
 {
-    private function __construct()
-    {
-    }
-
     public static function getToken()
     {
-        if (isset($_SESSION['fb_access_token'])) {
-            return $_SESSION['fb_access_token'];
+        $token = $_SESSION['fb_access_token'];
+
+        if (isset($token)) {
+            $result = (new ModelMain('users'))->read(['token'], ["token = '" . $token . "'"]);
+
+            return $result;
         }
         return null;
     }
 
-    public static function setToken($params)
+    public static function setToken($id, $params)
     {
         $_SESSION['fb_access_token'] = (string)$params;
+        (new ModelMain('users'))->update(["token = '" . $params . "'"], ["id = '" . $id . "'"]);
     }
 
 }

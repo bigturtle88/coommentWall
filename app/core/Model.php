@@ -40,9 +40,9 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
     {
         if (isset($arrColumns) && isset($arrValues)) {
             $tableName = $this->tableName;
-            $columns = implode(', ', $arrColumns);
-            $value = implode(', ', $arrValues);
-            $sql = "INSERT INTO {$tableName} ( {$columns} ) VALUES ( {$value} )";
+            $columns = '`' . implode('`, `', $arrColumns) . '`';
+            $value = "'" . implode("', '", $arrValues) . "'";
+            $sql = "INSERT INTO `{$tableName}` ( {$columns} ) VALUES ( {$value} )";
             $stm = $this->dbh->query($sql);
 
             return true;
@@ -69,7 +69,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
             }
         }
         if (isset($sql)) {
-            $sql = addslashes($sql);
+           // $sql = addslashes($sql);
             $stm = $this->dbh->query($sql);
             $result = $stm->fetchColumn();
             return $result;
@@ -87,8 +87,8 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
     {
         $sql = null;
         if (isset($arrParams)) {
-            $params = implode(', ', $arrParams);
-            $sql = "UPDATE  {$this->tableName} SET {$params}";
+            $params = implode(", " , $arrParams);
+            $sql = "UPDATE  `{$this->tableName}` SET {$params}";
 
             if (isset($arrConditions)) {
                 $sql .= ' WHERE ';

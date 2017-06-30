@@ -1,4 +1,3 @@
-
 <div class="container">
 
 
@@ -20,24 +19,22 @@
                 <div id="buttonControl">
 
                     <div class="col-xs-6">
-                        <button type="button" class="btn btn-default"
-                                id="rightButton">
-                            <span aria-hidden="true"><div class="fb-login-button" data-max-rows="1" data-size="large" scope="public_profile,email" data-button-type="continue_with" data-show-faces="false" onlogin="checkLoginState();" data-auto-logout-link="false" data-use-continue-as="false"></div></span>
-                        </button>
+
+                        <div class="fb-login-button" onlogin="logInWithFacebook();" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-
     </div>
+
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-        <div id="infoPanel">
 
-        </div>
+        <div id="infoPanel">
+            <?= $data['content']; ?></div>
     </div>
 
 

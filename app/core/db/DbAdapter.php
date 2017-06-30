@@ -83,7 +83,6 @@ class DbAdapter
     {
         if (isset($sql)) {
 
-            $sql = addslashes($sql);
             return self::$dbh->query($sql);
 
         }
