@@ -10,8 +10,7 @@
 
     <script src="<?= App::baseUrl() ?>/app/views/js/jquery-2.1.4.min.js"></script>
     <script src="<?= App::baseUrl() ?>/app/views/js/jquery.cookie.js"></script>
-    <script src="<?= App::baseUrl() ?>/app/views/js/facebookAuth.js"></script>
+
 </head>
 <body>
-<div id="fb-root"></div>
-<script src="<?= App::baseUrl() ?>/app/views/js/facebookAuth.js"></script>
+

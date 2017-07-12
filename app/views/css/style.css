@@ -1,31 +1,10 @@
-#diagrammaPanel{
-   margin-top:  10px ;
-
+.dialog {
+    position: relative;
+    display: flex;
+    padding: 10px 0px 20px 0px;
 }
-#buttonControl{
-    margin-top:  10px ;
-
-}
-
-.bar {
-    fill: steelblue;
-}
-
-.bar:hover {
-    fill: brown;
-}
-
-.axis {
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.x.axis path {
-    display: none;
+.list {
+position: relative;
+    display: flex;
+    padding: 10px 0px 20px 0px;
 }

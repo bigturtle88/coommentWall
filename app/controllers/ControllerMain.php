@@ -49,11 +49,11 @@ class ControllerMain extends Controller
                 };
 
                 Session::setToken($userParams['id'], $token);
-                header('Location: ' . \App::baseUrl() . '/main/comment');
+                header('Location: ' . \App::baseUrl() . '/page');
             }
 
         } else {
-            header('Location: ' . \App::baseUrl() . '/main/comment');
+            header('Location: ' . \App::baseUrl() . '/page');
         }
 
         View::render('header.php', $data);
