@@ -52,11 +52,15 @@ class ControllerComment extends Controller
 
             header('Location: ' . \App::baseUrl() . '/index');
         }
+
+        $text = array_shift($data);
+        $id = array_shift($data);
+        $id = empty($id) ?  0 : $id;
+
         $userInfo = Session::getUserInfo();
-        if (!empty($data) and !empty($userInfo)) {
-            $data = array_shift($data);
+        if (!empty($text) and !empty($userInfo)) {
             $model = new ModelMain('comments');
-            $model->create(['id', 'text', 'parent', 'user_id', 'create_at'], ['', $data, '', $userInfo['id'], date('Y-m-d H:i:s')]);
+            $model->create(['id', 'text', 'parent', 'user_id', 'create_at'], ['', $text, $id, $userInfo['id'], date('Y-m-d H:i:s')]);
 
         }
 
@@ -71,7 +75,8 @@ class ControllerComment extends Controller
             if($one['parent'] == 0) {
                 $one['parent'] = '#';
             }
-            $one['text'] = '('. $one['create_at'] .') ' . $one['text'];
+           // $one['text'] = '('. $one['create_at'] .') ' . $one['text'];
+
             $jsonData[] = ['id' => $one['id'], 'parent' => $one['parent'], 'text' => $one['text'] ];
 
         };
@@ -79,8 +84,34 @@ class ControllerComment extends Controller
 
         echo $data;
 
+    }
+    public function actionUpdate($data = null)
+    {
+        if (Session::getToken() === null) {
+            header('Location: ' . \App::baseUrl() . '/index');
+        }
+        $userInfo = Session::getUserInfo();
+        $id = array_shift($data);
+        $text = array_shift($data);
+        if (!empty($id) and !empty($text)) {
 
-
+            $model = new ModelMain('comments');
+            $text = "`text` = '" . $text . "'";
+            $id =  "`comments`.`id` = '" . $id . "'";
+            $model->update([$text], [$id]);
+        }
+    }
+    public function actionDelete($data = null)
+    {
+        if (Session::getToken() === null) {
+            header('Location: ' . \App::baseUrl() . '/index');
+        }
+        $userInfo = Session::getUserInfo();
+        $id = array_shift($data);
+        if (!empty($id)) {
+            $model = new ModelMain('comments');
+            $model->delete(['id = ' . $id]);
+        }
     }
 
   

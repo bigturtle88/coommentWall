@@ -38,12 +38,14 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
      */
     public function create($arrColumns, $arrValues)
     {
+
         if (isset($arrColumns) && isset($arrValues)) {
             $tableName = $this->tableName;
             $columns = '`' . implode('`, `', $arrColumns) . '`';
             $value = "'" . implode("', '", $arrValues) . "'";
 
             $sql = "INSERT INTO `{$tableName}` ( {$columns} ) VALUES ( {$value} )";
+
             $stm = $this->dbh->query($sql);
 
             return true;

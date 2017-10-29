@@ -16,11 +16,42 @@ $('#send').click(function(){
 $('#tree').jstree({
     "core" : {
         "animation" : 0,
-        "check_callback" : function (operation, node, parent, position, more) {
-            if(operation === "copy_node" || operation === "move_node") {
-                if(parent.id === "#") {
-                    return false; // prevent moving a child above or below the root
-                }
+        "check_callback": function (operation, node, parent, position, more) {
+
+            if (operation === "rename_node") {
+
+                setTimeout(function() { $.ajax({
+                    type: 'GET',
+                    url: '/comment/update/' + node.id + '/' + node.text,
+                    success: function(){
+                          $('#tree').jstree("refresh");
+                    }
+                });
+
+
+                }, 1000);
+            }
+            if (operation === "delete_node") {
+                setTimeout(function() { $.ajax({
+                    type: 'GET',
+                    url: '/comment/delete/'+ node.id,
+                    success: function(){
+                        $('#tree').jstree("refresh");
+                    }
+                });
+
+
+                }, 1000);
+            }
+            if (operation === "create_node") {
+                console.log(parent.id);
+                $.ajax({
+                    type: 'GET',
+                    url: '/comment/creat/'+ node.text + '/' + parent.id,
+                });
+
+
+
             }
             console.log(operation);
             return true; // allow everything else
@@ -57,5 +88,3 @@ $('#tree').jstree({
         "state", "types", "wholerow"
     ]
 });
-
-
