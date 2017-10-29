@@ -42,6 +42,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
             $tableName = $this->tableName;
             $columns = '`' . implode('`, `', $arrColumns) . '`';
             $value = "'" . implode("', '", $arrValues) . "'";
+
             $sql = "INSERT INTO `{$tableName}` ( {$columns} ) VALUES ( {$value} )";
             $stm = $this->dbh->query($sql);
 
@@ -70,8 +71,10 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
         }
         if (isset($sql)) {
            // $sql = addslashes($sql);
+         //   var_dump($sql);die();
             $stm = $this->dbh->query($sql);
-            $result = $stm->fetchColumn();
+          $result = $stm->fetchAll();
+        // $result = $stm->fetchColumn();
             return $result;
         }
         return false;
@@ -97,6 +100,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
             }
         }
         if (isset($sql)) {
+
             $stm = $this->dbh->query($sql);
             return true;
         }

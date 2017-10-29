@@ -13,8 +13,8 @@ class Session
 
         if (isset($token)) {
             $result = (new ModelMain('users'))->read(['token'], ["token = '" . $token . "'"]);
-
-            return $result;
+            $result = array_shift( $result );
+            return $result['token'];
         }
         return null;
     }
@@ -23,6 +23,18 @@ class Session
     {
         $_SESSION['fb_access_token'] = (string)$params;
         (new ModelMain('users'))->update(["token = '" . $params . "'"], ["id = '" . $id . "'"]);
+    }
+
+    public static function getUserInfo()
+    {
+        $token = $_SESSION['fb_access_token'];
+
+        if (isset($token)) {
+            $result = (new ModelMain('users'))->read(['*'], ["token = '" . $token . "'"]);
+            $result = array_shift( $result );
+            return $result;
+        }
+        return null;
     }
 
 }

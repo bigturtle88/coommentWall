@@ -10,7 +10,8 @@
 
     <script src="<?= App::baseUrl() ?>/app/views/js/jquery-2.1.4.min.js"></script>
     <script src="<?= App::baseUrl() ?>/app/views/js/jquery.cookie.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
 </head>
 <body>
 

@@ -44,12 +44,14 @@ class ControllerMain extends Controller
             $token = $fb->token();
             if ($token != null) {
                 $userParams = $fb->userParams();
-                if (Reg::verification($userParams) == false) {
-                    Reg::add($userParams);
-                };
 
-                Session::setToken($userParams['id'], $token);
-                header('Location: ' . \App::baseUrl() . '/page');
+                if (empty(Reg::verification($userParams))) {
+                    Reg::add($userParams);
+                }
+
+                    Session::setToken($userParams['id'], $token);
+                    header('Location: ' . \App::baseUrl() . '/page');
+
             }
 
         } else {

@@ -38,10 +38,7 @@ class ControllerPage extends Controller
      */
     public function actionIndex()
     {
-
         if (Session::getToken() === null) {}
-
-
         View::render('header.php', $data);
         View::render('page.php', $data);
         View::render('footer.php', $data);
