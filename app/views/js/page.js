@@ -16,44 +16,7 @@ $('#send').click(function(){
 $('#tree').jstree({
     "core" : {
         "animation" : 0,
-        "check_callback": function (operation, node, parent, position, more) {
-
-            if (operation === "rename_node") {
-
-                setTimeout(function() { $.ajax({
-                    type: 'GET',
-                    url: '/comment/update/' + node.id + '/' + node.text,
-                    success: function(){
-                          $('#tree').jstree("refresh");
-                    }
-                });
-
-
-                }, 1000);
-            }
-            if (operation === "delete_node") {
-                setTimeout(function() { $.ajax({
-                    type: 'GET',
-                    url: '/comment/delete/'+ node.id,
-                    success: function(){
-                        $('#tree').jstree("refresh");
-                    }
-                });
-
-
-                }, 1000);
-            }
-            if (operation === "create_node") {
-                console.log(parent.id);
-                $.ajax({
-                    type: 'GET',
-                    url: '/comment/creat/'+ node.text + '/' + parent.id,
-                });
-
-
-
-            }
-            console.log(operation);
+        "check_callback": function () {
             return true; // allow everything else
         },
         "themes" : { "stripes" : true, },
@@ -61,7 +24,7 @@ $('#tree').jstree({
             'url': function (node) {
                 return node.id === '#' ?
                     '/comment/read/' :
-                    '/page/child/' + node.id ;
+                    '/comment/read/' + node.id ;
             },
             'dataType' : "json" }
     },
@@ -87,4 +50,27 @@ $('#tree').jstree({
         "contextmenu", "dnd", "search",
         "state", "types", "wholerow"
     ]
+}).on('create_node.jstree', function (e, data) {
+
+    $.get('/comment/creat/'+ data.node.text + '/' + data.node.parent)
+        .done(function (d) {
+            obj =  jQuery.parseJSON(d);
+            data.instance.set_id(data.node, obj.id);
+        })
+        .fail(function () {
+            data.instance.refresh();
+        });
+}).on('rename_node.jstree', function (e, data) {
+    $.get('/comment/update/' + data.node.id + '/' + data.node.text)
+        .done(function (d) {
+            data.instance.refresh();
+        })
+        .fail(function () {
+            data.instance.refresh();
+        });
+}).on('delete_node.jstree', function (e, data) {
+    $.get('/comment/delete/' + data.node.id + '/' + data.node.text)
+        .fail(function () {
+            data.instance.refresh();
+        });
 });

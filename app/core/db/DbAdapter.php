@@ -98,5 +98,10 @@ class DbAdapter
 
     }
 
+    public function lastInsertId()
+    {
+        return self::$dbh->lastInsertId();
+    }
+
 
 }

@@ -53,23 +53,28 @@ class ControllerComment extends Controller
             header('Location: ' . \App::baseUrl() . '/index');
         }
 
-        $text = array_shift($data);
+        $text = urldecode(array_shift($data));
+
         $id = array_shift($data);
         $id = empty($id) ?  0 : $id;
 
         $userInfo = Session::getUserInfo();
+
         if (!empty($text) and !empty($userInfo)) {
             $model = new ModelMain('comments');
-            $model->create(['id', 'text', 'parent', 'user_id', 'create_at'], ['', $text, $id, $userInfo['id'], date('Y-m-d H:i:s')]);
-
+            $idComment = $model->creat(['id', 'text', 'parent', 'user_id', 'create_at'], ['', $text, $id, $userInfo['id'], date('Y-m-d H:i:s')]);
+            echo  json_encode(['id' => $idComment]);
         }
-
-
+        echo false;
     }
     public function actionRead()
     {
         $model = new ModelMain('comments');
-        $data = $model->read(['id, parent, text, create_at'],[' 1 ORDER BY create_at DESC']);
+
+        $data = $model->read(['id, parent, text, create_at'], [' parent = 0 ORDER BY create_at DESC']);
+        $dataChildren = $model->read(['id, parent, text, create_at'], [' parent > 0 ORDER BY create_at ASC']);
+
+        $data =  array_merge($data, $dataChildren);
         $jsonData = [];
         foreach($data as $one) {
             if($one['parent'] == 0) {
@@ -77,7 +82,7 @@ class ControllerComment extends Controller
             }
            // $one['text'] = '('. $one['create_at'] .') ' . $one['text'];
 
-            $jsonData[] = ['id' => $one['id'], 'parent' => $one['parent'], 'text' => $one['text'] ];
+            $jsonData[] = ['id' => $one['id'], 'parent' => $one['parent'], 'text' => $one['text'], 'children' => (bool)$one['children']];
 
         };
         $data = json_encode($jsonData);
