@@ -48,15 +48,16 @@ class ControllerComment extends Controller
     }
     public function actionCreat($data = null)
     {
-        if (Session::getToken() === null) {
 
-            header('Location: ' . \App::baseUrl() . '/index');
-        }
+//        if (Session::getToken() === null) {
+//
+//            header('Location: ' . \App::baseUrl() . '/index');
+//        }
 
         $text = urldecode(array_shift($data));
 
         $id = array_shift($data);
-        $id = empty($id) ?  0 : $id;
+        $id = empty($id) ? null : $id;
 
         $userInfo = Session::getUserInfo();
 
@@ -71,8 +72,8 @@ class ControllerComment extends Controller
     {
         $model = new ModelMain('comments');
 
-        $data = $model->read(['id, parent, text, create_at'], [' parent = 0 ORDER BY create_at DESC']);
-        $dataChildren = $model->read(['id, parent, text, create_at'], [' parent > 0 ORDER BY create_at ASC']);
+        $data = $model->read(['id, parent, text, create_at'], [' parent IS NULL ORDER BY create_at DESC']);
+        $dataChildren = $model->read(['id, parent, text, create_at'], [' parent IS NOT NULL ORDER BY create_at ASC']);
 
         $data =  array_merge($data, $dataChildren);
         $jsonData = [];

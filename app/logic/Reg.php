@@ -17,7 +17,7 @@ class Reg
     static public function add($params)
     {
 
-            (new ModelMain('users'))->create(['id', 'name', 'email', 'token', 'create_at'],
+            (new ModelMain('users'))->creat(['id', 'name', 'email', 'token', 'create_at'],
                 [$params['id'], $params['name'], $params['email'], 'NULL', date("Y-m-d H:i:s")]);
 
     }

@@ -19,7 +19,7 @@ class Migration
         $this->dbh->config(\App::$config['db']);
     }
 
-    public function creat($params)
+    public function creatTable($params)
     {
         $this->dbh->query($params);
     }

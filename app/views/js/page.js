@@ -31,20 +31,12 @@ $('#tree').jstree({
     "types" : {
         "#" : {
             "max_children" : 1,
-            "max_depth" : 4,
+            "max_depth" : 2,
             "valid_children" : ["root"]
-        },
-        "root" : {
-            "icon" : false,
-            "valid_children" : ["default"]
         },
         "default" : {
             "valid_children" : ["default","file"]
         },
-        "file" : {
-            "icon" : "glyphicon glyphicon-file",
-            "valid_children" : []
-        }
     },
     "plugins" : [
         "contextmenu", "dnd", "search",
