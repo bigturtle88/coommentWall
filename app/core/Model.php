@@ -72,7 +72,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
         }
         if (isset($sql)) {
            // $sql = addslashes($sql);
-  
+
             $stm = $this->dbh->query($sql);
           $result = $stm->fetchAll();
         // $result = $stm->fetchColumn();

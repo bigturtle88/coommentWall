@@ -32,15 +32,50 @@ $('#tree').jstree({
         "#" : {
             "max_children" : 1,
             "max_depth" : 2,
-            "valid_children" : ["root"]
+            "valid_children" : ["root"],
         },
         "default" : {
             "valid_children" : ["default","file"]
         },
+        "file" : {
+            "icon" : "glyphicon glyphicon-file",
+            "valid_children" : []
+        }
+    },
+    "contextmenu":{
+        "items": function($node) {
+            var tree = $("#tree").jstree(true);
+            return {
+                "Create": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Create",
+                    "action": function (obj) {
+                        $node = tree.create_node($node);
+                        tree.edit($node);
+                    }
+                },
+                "Rename": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Edit",
+                    "action": function (obj) {
+                        tree.edit($node);
+                    }
+                },
+                "Remove": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Delete",
+                    "action": function (obj) {
+                        tree.delete_node($node);
+                    }
+                }
+            };
+        }
     },
     "plugins" : [
-        "contextmenu", "dnd", "search",
-        "state", "types", "wholerow"
+        "contextmenu"
     ]
 }).on('create_node.jstree', function (e, data) {
 
