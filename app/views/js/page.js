@@ -49,9 +49,9 @@ $('#tree').jstree({
                 "Create": {
                     "separator_before": false,
                     "separator_after": false,
-                    "label": "Create",
+                    "label": "Commint",
                     "action": function (obj) {
-                        $node = tree.create_node($node);
+                        $node = tree.create_node($node, { "attr": { "rel": "Category"}, "text": "Commint" });
                         tree.edit($node);
                     }
                 },
