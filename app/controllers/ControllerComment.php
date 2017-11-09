@@ -117,8 +117,9 @@ class ControllerComment extends Controller
         $userInfo = Session::getUserInfo();
         $id = array_shift($data);
         if (!empty($id)) {
+            $userId =  "`comments`.`user_id` = '" . $userInfo['id'] . "'";
             $model = new ModelMain('comments');
-            $model->delete(['id = ' . $id]);
+            $model->delete(['id = ' . $id .' AND ' . $userId ]);
         }
     }
 

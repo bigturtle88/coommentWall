@@ -5,7 +5,7 @@
 
 
     <div class="text-center">
-        <h4 class="page-header"><a href="<?= App::baseUrl() ?>/app/">
+        <h4 class="page-header"><a href="<?= App::baseUrl() ?>">
                 <img id="logo"
                      src="<?= App::baseUrl() ?>/app/views/img/logo.png"
                      alt="Whitesquare logo">

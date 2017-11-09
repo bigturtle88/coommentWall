@@ -118,6 +118,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
             $tableName = $this->tableName;
             $conditions = implode(', ', $arrConditions);
             $sql = "DELETE FROM {$tableName} WHERE {$conditions}";
+            var_dump($sql);die();
             $stm = $this->dbh->query($sql);
             return true;
         }

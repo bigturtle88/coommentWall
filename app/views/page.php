@@ -3,7 +3,7 @@
     <div class="content">
 
     <div class="text-center">
-        <div class="page-header"><a href="<?= App::baseUrl() ?>/app/">
+        <div class="page-header"><a href="<?= App::baseUrl() ?>">
                 <img id="logo"
                      src="<?= App::baseUrl() ?>/app/views/img/logo.png"
                      alt="Whitesquare logo">
