@@ -23,7 +23,7 @@
         </div>
         <div class="list">
 
-        <div class="col-xs-12"><div id="tree"></div>
+        <div class="col-xs-12"><div id="tree" data-jstree='{"icon":"path/file.png"}'></div>
         </div>
         </div>
     </div>

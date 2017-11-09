@@ -49,10 +49,9 @@ class ControllerComment extends Controller
     public function actionCreat($data = null)
     {
 
-//        if (Session::getToken() === null) {
-//
-//            header('Location: ' . \App::baseUrl() . '/index');
-//        }
+        if (Session::getToken() === null) {
+            header('Location: ' . \App::baseUrl() . '/index');
+        }
 
         $text = urldecode(array_shift($data));
 
@@ -81,7 +80,6 @@ class ControllerComment extends Controller
             if($one['parent'] == 0) {
                 $one['parent'] = '#';
             }
-           // $one['text'] = '('. $one['create_at'] .') ' . $one['text'];
 
             $jsonData[] = ['id' => $one['id'], 'parent' => $one['parent'], 'text' => $one['text'], 'children' => (bool)$one['children']];
 
@@ -96,6 +94,9 @@ class ControllerComment extends Controller
         if (Session::getToken() === null) {
             header('Location: ' . \App::baseUrl() . '/index');
         }
+
+
+
         $userInfo = Session::getUserInfo();
         $id = array_shift($data);
         $text = array_shift($data);
@@ -104,7 +105,8 @@ class ControllerComment extends Controller
             $model = new ModelMain('comments');
             $text = "`text` = '" . $text . "'";
             $id =  "`comments`.`id` = '" . $id . "'";
-            $model->update([$text], [$id]);
+            $userId =  "`comments`.`user_id` = '" . $userInfo['id'] . "'";
+            $model->update([$text], [$id,   $userId]);
         }
     }
     public function actionDelete($data = null)

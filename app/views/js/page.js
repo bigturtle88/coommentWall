@@ -19,28 +19,16 @@ $('#tree').jstree({
         "check_callback": function () {
             return true; // allow everything else
         },
-        "themes" : { "stripes" : true, },
+        "themes" : { "stripes" : true },
         'data' :{
+            "state" : {"opened" : true },
             'url': function (node) {
                 return node.id === '#' ?
                     '/comment/read/' :
                     '/comment/read/' + node.id ;
             },
-            'dataType' : "json" }
-    },
-    "types" : {
-        "#" : {
-            "max_children" : 1,
-            "max_depth" : 2,
-            "valid_children" : ["root"],
-        },
-        "default" : {
-            "valid_children" : ["default","file"]
-        },
-        "file" : {
-            "icon" : "glyphicon glyphicon-file",
-            "valid_children" : []
-        }
+            'dataType' : "json" },
+
     },
     "contextmenu":{
         "items": function($node) {
@@ -49,9 +37,9 @@ $('#tree').jstree({
                 "Create": {
                     "separator_before": false,
                     "separator_after": false,
-                    "label": "Commint",
+                    "label": "Comment",
                     "action": function (obj) {
-                        $node = tree.create_node($node, { "attr": { "rel": "Category"}, "text": "Commint" });
+                        $node = tree.create_node($node, { "attr": { "rel": "Category"}, "text": "Comment" });
                         tree.edit($node);
                     }
                 },
@@ -74,8 +62,26 @@ $('#tree').jstree({
             };
         }
     },
+    "types" : {
+        "#" : {
+            "max_children" : 1,
+            "max_depth" : 4,
+            "valid_children" : ["default","file"],
+            "icon" : "glyphicon glyphicon-file",
+        },
+        "root" : {
+            "icon" : "glyphicon glyphicon-file",
+            "valid_children" : ["default"]
+        },
+        "default" : {
+            "max_children": 1,
+            "max_depth": 4,
+            "valid_children": ["default", "file"],
+            "icon": "glyphicon glyphicon-file",
+        }
+    },
     "plugins" : [
-        "contextmenu"
+        "contextmenu","types"
     ]
 }).on('create_node.jstree', function (e, data) {
 

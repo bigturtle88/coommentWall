@@ -71,11 +71,11 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
             }
         }
         if (isset($sql)) {
-           // $sql = addslashes($sql);
+         //  $sql = addslashes($sql);
 
             $stm = $this->dbh->query($sql);
           $result = $stm->fetchAll();
-        // $result = $stm->fetchColumn();
+
             return $result;
         }
         return false;
@@ -96,7 +96,7 @@ abstract class Model implements TableInsert, TableSelect, TableUpdate, TableDele
 
             if (isset($arrConditions)) {
                 $sql .= ' WHERE ';
-                $condition = implode(' AND WHERE ', $arrConditions);
+                $condition = implode(' AND ', $arrConditions);
                 $sql .= $condition;
             }
         }
